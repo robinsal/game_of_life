@@ -2,15 +2,18 @@
 
 ## Description
 The Game of Life
-Rules: Cells are either 'alive' or 'dead'
+
+Rules: 
+
+Cells are either 'alive' or 'dead'
+
+When they are alive, this is represented by coloring the cell black
        
-       When they are alive, this is represented by coloring the cell black
+Live cells stay alive when they have exactly 2 or 3 neighbors,
+if they have more they 'die' from overcrowding,
+and if they have less they 'die' from loneliness.
        
-       Live cells stay alive when they have exactly 2 or 3 neighbors,
-           if they have more they 'die' from overcrowding,
-           and if they have less they 'die' from loneliness.
-       
-       A non-live cell becomes alive if it has exactly 3 neighbors.
+A non-live cell becomes alive if it has exactly 3 neighbors.
   
 This game was invented by John Conway, and it creates some cool visuals
   
