@@ -1,3 +1,18 @@
+/**
+ * The Game of Life
+ * Rules: Cells are either 'alive' or 'dead'
+ *      When they are alive, this is represented by coloring the cell black
+ *      Live cells stay alive when they have exactly 2 or 3 neighbors,
+ *          if they have more they 'die' from overcrowding,
+ *          and if they have less they 'die' from loneliness.
+ *      A non-live cell becomes alive if it has exactly 3 neighbors.
+ * 
+ * This game was invented by John Conway, and it creates some cool visuals
+ * 
+ * @author Alex Robinson
+ * October 12, 2019
+ */
+
 // get the body of the DOM tree and create an element to hold our grid
 const body = document.querySelector('body');
 const container = document.createElement('div');
@@ -5,8 +20,8 @@ container.style.cssText = 'top: 15px; left: 320px; position: absolute';
 body.appendChild(container);
 
 var blackcells = []
-var whitecells = []
-// Create a 2D array of 16 div nodes
+
+// Create a 2D array of 30 x 30 div nodes
 var grid = []
 var i, j;
 for (i = 0; i < 30; i++) {
@@ -21,7 +36,6 @@ for (i = 0; i < 30; i++) {
         curr.class = 'cell'
 	    curr.style.cssText = 'border: 1px solid; width: 20px; height: 20px;'
         curr.style.backgroundColor = 'white';
-        whitecells.push(curr)
 
         row.appendChild(curr); 
         curr.onclick = setColor;
@@ -37,15 +51,12 @@ function setColor() {
 
     if (!blackcells.includes(this)) {
         blackcells.push(this)
-        //whitecells.pop()
     }
 }
 
-var play = true
-/*while (play) {
-    updateGrid()
-}*/
-
+/**
+ * updates the grid based on the rules of the game
+ */
 function updateGrid() {
     var newgrid = []
     var i, j
@@ -74,6 +85,10 @@ function updateGrid() {
     }
 }
 
+/**
+ * returns the number of neighbors of a certain cell 'alive' in the grid
+ * i and j the indeces in the grid where we are counting neighbors
+ */
 function getCount(i, j) {
     var count = 0
     if (i>0 && j>0 && blackcells.includes(grid[i-1][j-1])) count++;
@@ -87,11 +102,18 @@ function getCount(i, j) {
 	return count;
 }
 
+/**
+ * This code block creates a button with which the user can update the grid
+ */
 const update = document.createElement('button');
 update.onclick = updateGrid;
 update.textContent = 'Update';
 document.querySelector('h2').appendChild(update);
 
+/**
+ * This code block creates a randomize button that will create a random grid for the
+ * user to start with.
+ */
 const random = document.createElement('button');
 function randomize() {
     clear;
@@ -118,6 +140,9 @@ random.onclick = randomize;
 random.textContent = 'Set Random Board';
 document.querySelector('h2').appendChild(random);
 
+/**
+ * This code block creates a clear button that will clear the board for the user.
+ */
 const clearAll = document.createElement('button');
 function clear() { 
     var i;
